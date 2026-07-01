@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Sozlamalar{% endblock %}
+
+{% block content %}
+<!--
+    MASALA 10: SettingsView — LoginRequiredMixin bilan himoyalangan CBV
+-->
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">⚙️ Sozlamalar</h4>
+            </div>
+            <div class="card-body">
+
+                <p>Bu sahifa <code>LoginRequiredMixin</code> bilan himoyalangan.</p>
+                <p>Faqat login bo'lgan foydalanuvchilar bu yerga kira oladi.</p>
+
+                <!-- TODO: Sozlamalar qo'shing (parol o'zgartirish va h.k.) -->
+                <div class="alert alert-info">
+                    <strong>TODO:</strong> Bu yerga foydali sozlamalar qo'shing.
+                    <br>Masalan: parol o'zgartirish, email o'zgartirish, notification sozlamalari.
+                </div>
+
+                <a href="{% url 'profile' %}" class="btn btn-outline-secondary">Profilga qaytish</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

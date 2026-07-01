@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog Postlar{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>📰 Blog Postlar</h2>
+
+    <!-- Faqat blog.add_post ruxsati bo'lganlarga ko'rsatiladi -->
+    {% if user.has_perm 'blog.add_post' %}
+        <a href="{% url 'add_post' %}" class="btn btn-success">+ Yangi post</a>
+    {% endif %}
+</div>
+
+{% if posts %}
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text text-muted">
+                        {{ post.content|truncatewords:20 }}
+                    </p>
+                    <small class="text-muted">
+                        ✍️ {{ post.author.username }} |
+                        📅 {{ post.created_at|date:"d.m.Y" }}
+                    </small>
+                </div>
+                <div class="card-footer d-flex gap-2">
+                    <a href="{% url 'post_detail' post.pk %}" class="btn btn-sm btn-outline-primary">
+                        Ko'rish
+                    </a>
+                    {% if user.has_perm 'blog.change_post' %}
+                        <a href="{% url 'edit_post' post.pk %}" class="btn btn-sm btn-outline-warning">
+                            Tahrirlash
+                        </a>
+                    {% endif %}
+                    {% if user.has_perm 'blog.delete_post' %}
+                        <a href="{% url 'delete_post' post.pk %}" class="btn btn-sm btn-outline-danger">
+                            O'chirish
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-info">
+        Hozircha post yo'q.
+        {% if user.has_perm 'blog.add_post' %}
+            <a href="{% url 'add_post' %}">Birinchi postni yozing!</a>
+        {% endif %}
+    </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block content %}
+<!--
+    MASALA 9: Profil sahifasi
+
+    Quyidagi ma'lumotlarni ko'rsating:
+    - username       → {{ user.username }}
+    - email          → {{ user.email }}
+    - date_joined    → {{ user.date_joined }}
+    - last_login     → {{ user.last_login }}
+    - is_superuser   → {{ user.is_superuser }}
+-->
+<td>
+    {{ user.username }}
+    {{ user.email }}
+    {{ user.date_joined }}
+    {{ user.last_login }}
+    {{ user.is_superuser }}
+</td>
+
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">👤 Profil ma'lumotlari</h4>
+            </div>
+            <div class="card-body">
+
+                <!-- TODO: Quyidagi jadval ma'lumotlarini to'g'rilang -->
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th scope="row" width="40%">Foydalanuvchi nomi</th>
+                            <td>{{ user.username }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Email</th>
+                            <td>
+                                {{ user.email|default:"Ko'rsatilmagan" }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Ro'yxatdan o'tgan</th>
+                            <td>
+                                <!-- TODO: Sanani to'g'ri formatda ko'rsating -->
+                                {{ user.date_joined }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Oxirgi kirish</th>
+                            <td>{{ user.last_login }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Superuser</th>
+                            <td>
+                                {% if user.is_superuser %}
+                                    <span class="badge bg-danger">Ha</span>
+                                {% else %}
+                                    <span class="badge bg-secondary">Yo'q</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Faol holat</th>
+                            <td>
+                                {% if user.is_active %}
+                                    <span class="badge bg-success">Faol</span>
+                                {% else %}
+                                    <span class="badge bg-warning">Nofaol</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Guruhlar</th>
+                            <td>
+                                {% for group in user.groups.all %}
+                                    <span class="badge bg-info">{{ group.name }}</span>
+                                {% empty %}
+                                    <span class="text-muted">Guruh yo'q</span>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="d-flex gap-2">
+                    <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">Dashboard</a>
+                    <a href="{% url 'settings' %}" class="btn btn-outline-primary">Sozlamalar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

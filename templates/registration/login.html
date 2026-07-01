@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}Kirish{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">🔑 Tizimga kirish</h4>
+            </div>
+            <div class="card-body">
+
+                <!--
+                    MASALA 2: Login sahifasi
+                    LoginView bu shablonni ishlatadi.
+
+                    {{ form }} — LoginView dan kelgan forma
+                    {% url 'register' %} — Ro'yxatdan o'tish sahifasi
+                -->
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <!-- Forma xatolari -->
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            Username yoki parol noto'g'ri.
+                        </div>
+                    {% endif %}
+
+                    <!-- next parametri (Bonus 3 uchun kerak) -->
+                    {% if next %}
+                        <input type="hidden" name="next" value="{{ next }}">
+                    {% endif %}
+
+                    <div class="mb-3">
+                        <label for="{{ form.username.id_for_label }}" class="form-label">
+                            Foydalanuvchi nomi
+                        </label>
+                        <input type="text"
+                               name="username"
+                               class="form-control {% if form.username.errors %}is-invalid{% endif %}"
+                               id="{{ form.username.id_for_label }}"
+                               placeholder="Foydalanuvchi nomini kiriting"
+                               autofocus>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.password.id_for_label }}" class="form-label">
+                            Parol
+                        </label>
+                        <input type="password"
+                               name="password"
+                               class="form-control"
+                               id="{{ form.password.id_for_label }}"
+                               placeholder="Parolni kiriting">
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Kirish</button>
+                    </div>
+                </form>
+
+                <hr>
+                <p class="text-center mb-0">
+                    Hisobingiz yo'qmi?
+                    <a href="{% url 'register' %}">Ro'yxatdan o'tish</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

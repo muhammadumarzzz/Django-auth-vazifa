@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}O'chirishni tasdiqlang{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card border-danger">
+            <div class="card-header bg-danger text-white">
+                <h4 class="mb-0">🗑️ O'chirishni tasdiqlang</h4>
+            </div>
+            <div class="card-body">
+                <p class="lead">
+                    "<strong>{{ post.title }}</strong>" postini o'chirishni
+                    xohlaysizmi?
+                </p>
+                <div class="alert alert-warning">
+                    ⚠️ Bu amalni ortga qaytarib bo'lmaydi!
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-danger">Ha, o'chirish</button>
+                        <a href="{% url 'post_list' %}" class="btn btn-outline-secondary">Bekor qilish</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<!--
+    MASALA 8: Dashboard
+    @login_required bilan himoyalangan.
+    Login bo'lmagan foydalanuvchi bu sahifani ko'ra olmaydi.
+-->
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card border-success">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">📊 Dashboard</h4>
+            </div>
+            <div class="card-body">
+
+                <!-- Foydalanuvchi tabrigi -->
+                <div class="alert alert-success">
+                    <h5>🎉 Salom, <strong>{{ user.username }}</strong>!</h5>
+                    <p class="mb-0">Dashboard sahifasiga muvaffaqiyatli kirdingiz.</p>
+                </div>
+
+                <!-- Tezkor havolalar -->
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h2>👤</h2>
+                                <a href="{% url 'profile' %}" class="btn btn-outline-primary btn-sm">
+                                    Profilim
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h2>⚙️</h2>
+                                <a href="{% url 'settings' %}" class="btn btn-outline-secondary btn-sm">
+                                    Sozlamalar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h2>📝</h2>
+                                <a href="{% url 'post_list' %}" class="btn btn-outline-info btn-sm">
+                                    Blog
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TODO: Qo'shimcha ma'lumotlar qo'shing -->
+                <!-- Masalan: so'nggi postlar, statistika va h.k. -->
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

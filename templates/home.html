@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Bosh sahifa{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body text-center p-5">
+                <h1 class="display-5 mb-3">🔐 Django Authentication</h1>
+                <p class="lead text-muted">IT Shaharcha | Amaliy uyga vazifa</p>
+                <hr>
+
+                <!-- MASALA 11: Login holatiga qarab tarkib ko'rsating -->
+                {% if user.is_authenticated %}
+                    {# Login bo'lgan foydalanuvchi uchun #}
+                    'Salom, {{ user.username }}!' + Chiqish
+                    <div class="alert alert-success">
+                        <h4>Salom, <strong>{{ user.username }}</strong>! 👋</h4>
+                        <p>Tizimga muvaffaqiyatli kirdingiz.</p>
+                    </div>
+                    <div class="d-flex gap-2 justify-content-center">
+                        <a href="{% url 'dashboard' %}" class="btn btn-primary">Dashboard</a>
+                        <a href="{% url 'profile' %}" class="btn btn-outline-secondary">Profilim</a>
+                        <a href="{% url 'post_list' %}" class="btn btn-outline-info">Blog</a>
+                    </div>
+                {% else %}
+                    {# Login bo'lmagan foydalanuvchi uchun #}
+                    'Salom, {{ user.username }}!' Kirish +
+                    <p class="text-muted">Davom etish uchun tizimga kiring.</p>
+                    <div class="d-flex gap-2 justify-content-center">
+                        <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Kirish</a>
+                        <a href="{% url 'register' %}" class="btn btn-outline-primary btn-lg">Ro'yxatdan o'tish</a>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+
+        <!-- Qismlar ma'lumoti -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">📋 Vazifa qismlari</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li>✅ 2-Qism: Authentication asoslari</li>
+                            <li>✅ 3-Qism: Registration</li>
+                            <li>✅ 4-Qism: @login_required</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li>✅ 5-Qism: Groups va Permissions</li>
+                            <li>📁 6-7 Qism: auth_project_v2</li>
+                            <li>📁 8-Qism: blog_platform</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
