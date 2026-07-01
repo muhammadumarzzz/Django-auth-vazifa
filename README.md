@@ -159,3 +159,4 @@ git push -u origin main
 
 - Django hujjati: https://docs.djangoproject.com/en/stable/topics/auth/
 - IT Shaharcha: https://itshaharcha.uz
+"# Django-auth-vazifa" 
